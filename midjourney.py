@@ -432,16 +432,16 @@ class Midjourney(Plugin):
             context.__setitem__("description", description)
             context.__setitem__("image_url", image_url)
             if action == 'DESCRIBE' or action == 'SHORTEN':
-                prompt = task['properties']['finalPrompt']
+                # prompt = task['properties']['finalPrompt']
                 reply_text = f"✅ 任务已完成\n📨 任务ID: {task_id}\n✨ {description}\n\n{self.get_buttons(task)}\n💡 使用 {self.mj_trigger_prefix}up 任务ID 序号执行动作\n🔖 {self.mj_trigger_prefix}up {task_id} 1"
-                return Reply(ReplyType.TEXT, reply_text)
+                return Reply(ReplyType.IMAGE_URL, reply_text)
             elif action == 'UPSCALE':
                 reply_text = f"✅ 任务已完成\n📨 任务ID: {task_id}\n✨ {description}\n\n{self.get_buttons(task)}\n💡 使用 {self.mj_trigger_prefix}up 任务ID 序号执行动作\n🔖 {self.mj_trigger_prefix}up {task_id} 1"
-                return Reply(ReplyType.TEXT, reply_text)
+                return Reply(ReplyType.IMAGE_URL, reply_text)
             else:
                 # image_storage = self.download_and_compress_image(image_url)
                 reply_text = f"✅ 任务已完成\n📨 任务ID: {task_id}\n✨ {description}\n\n{self.get_buttons(task)}\n💡 使用 {self.mj_trigger_prefix}up 任务ID 序号执行动作\n🔖 {self.mj_trigger_prefix}up {task_id} 1"
-                return Reply(ReplyType.TEXT, reply_text)
+                return Reply(ReplyType.IMAGE_URL, reply_text)
         elif status == 'FAILURE':
             self.task_id_dict.pop(task_id)
             self.task_msg_dict.pop(task_id)
